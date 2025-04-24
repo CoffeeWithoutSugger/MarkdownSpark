@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkdownSpark</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f5f7fa;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23c3cfe2;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='10' y='10' width='80' height='80' rx='15' fill='url(%23grad)'/%3E%3Cpath d='M30 30 h40 v20 h-20 v20 h-20 v-40 z' fill='%234f46e5'/%3E%3Ccircle cx='70' cy='70' r='10' fill='%23ffeb3b'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="theme-toggle">
+        <input type="checkbox" id="theme-switch">
+        <label for="theme-switch">
+            <div class="toggle-wrapper">
+                <span class="toggle-icon sun">☀️</span>
+                <span class="toggle-icon moon">🌙</span>
+                <div class="toggle-ball"></div>
+            </div>
+        </label>
+    </div>
+    <div class="container">
+        <div class="editor-container">
+            <textarea id="editor" placeholder="在此输入Markdown命令，按 / 查看快捷命令..."></textarea>
+            <button id="save-tag" class="save-tag-btn">保存标签</button>
+            <div id="suggestions" class="suggestions">
+                <input type="text" id="suggestion-search" placeholder="搜索快捷命令..." />
+                <div id="suggestion-list">
+                    <div class="suggestion-item" data-action="heading1">一级标题</div>
+                    <div class="suggestion-item" data-action="heading2">二级标题</div>
+                    <div class="suggestion-item" data-action="heading3">三级标题</div>
+                    <div class="suggestion-item" data-action="heading4">四级标题</div>
+                    <div class="suggestion-item" data-action="heading5">五级标题</div>
+                    <div class="suggestion-item" data-action="heading6">六级标题</div>
+                    <div class="suggestion-item" data-action="paragraph">段落</div>
+                    <div class="suggestion-item" data-action="blockquote">区块引用</div>
+                    <div class="suggestion-item" data-action="codeblock">代码区块</div>
+                    <div class="suggestion-item" data-action="list-unordered">无序列表</div>
+                    <div class="suggestion-item" data-action="list-ordered">有序列表</div>
+                    <div class="suggestion-item" data-action="divider">分割线</div>
+                    <div class="suggestion-item" data-action="link">链接</div>
+                    <div class="suggestion-item" data-action="bold">加粗</div>
+                    <div class="suggestion-item" data-action="italic">斜体</div>
+                    <div class="suggestion-item" data-action="strikethrough">删除线</div>
+                    <div class="suggestion-item" data-action="table">表格</div>
+                    <div class="suggestion-item" data-action="inline-code">行内代码</div>
+                    <div class="suggestion-item" data-action="task-list">任务列表</div>
+                </div>
+            </div>
+        </div>
+        <div class="preview-container">
+            <div id="preview"></div>
+        </div>
+    </div>
+    <a href="index.html" class="back-btn">返回欢迎页</a>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
