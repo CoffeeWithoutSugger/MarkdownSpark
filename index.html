@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Markdonw Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://img.storage.cloudns.biz/file/collect/zUAp2jbV.png') no-repeat center center fixed;
+            background-size: cover;
+			.element {opacity: 0.5;} /* 取值范围：0（完全透明）到 1（完全不透明） */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .welcome-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #e0e7ff;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #4f46e5;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .btn:hover {
+            background: #3b82f6;
+            transform: scale(1.05);
+        }
+        .tag-list {
+            margin-top: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        .tag-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #e0e7ff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .tag-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .tag-item span {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>欢迎体验Markdown编辑器</h1>
+        <p>释放你的创意，随时随地编辑和预览Markdown内容！</p>
+        <a href="edit.html" class="btn">开始编辑</a>
+        <div class="tag-list" id="tag-list"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
