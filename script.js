@@ -123,17 +123,49 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('请输入内容后再保存！');
                 return;
             }
-            const tagName = prompt('请输入标签名称：');
-            if (tagName && tagName.trim()) {
-                const tags = JSON.parse(localStorage.getItem('markdownTags') || '[]');
-                const timestamp = new Date().toLocaleString('zh-CN');
-                tags.push({ name: tagName.trim(), content, timestamp });
-                localStorage.setItem('markdownTags', JSON.stringify(tags));
-                alert('保存成功！');
-                editor.value = '';
-                renderMarkdown();
-            } else if (tagName !== null) {
-                alert('标签名称不能为空！');
+            const urlParams = new URLSearchParams(window.location.search);
+            const tagIndex = urlParams.get('tagIndex');
+            const tags = JSON.parse(localStorage.getItem('markdownTags') || '[]');
+            const timestamp = new Date().toLocaleString('zh-CN');
+
+            if (tagIndex !== null && tags[tagIndex]) {
+                const choice = confirm('选择保存方式：\n点击“确定”覆盖原有标签\n点击“取消”保存至新标签');
+                if (choice) {
+                    // 覆盖原有标签
+                    tags[tagIndex].content = content;
+                    tags[tagIndex].timestamp = timestamp;
+                    localStorage.setItem('markdownTags', JSON.stringify(tags));
+                    alert('保存成功！');
+                    editor.value = '';
+                    renderMarkdown();
+                    window.location.href = 'index.html'; // 返回首页
+                } else {
+                    // 保存至新标签
+                    const tagName = prompt('请输入新标签名称：');
+                    if (tagName && tagName.trim()) {
+                        tags.push({ name: tagName.trim(), content, timestamp });
+                        localStorage.setItem('markdownTags', JSON.stringify(tags));
+                        alert('保存成功！');
+                        editor.value = '';
+                        renderMarkdown();
+                        window.location.href = 'index.html'; // 返回首页
+                    } else if (tagName !== null) {
+                        alert('标签名称不能为空！');
+                    }
+                }
+            } else {
+                // 新建标签
+                const tagName = prompt('请输入标签名称：');
+                if (tagName && tagName.trim()) {
+                    tags.push({ name: tagName.trim(), content, timestamp });
+                    localStorage.setItem('markdownTags', JSON.stringify(tags));
+                    alert('保存成功！');
+                    editor.value = '';
+                    renderMarkdown();
+                    window.location.href = 'index.html'; // 返回首页
+                } else if (tagName !== null) {
+                    alert('标签名称不能为空！');
+                }
             }
         });
 
@@ -243,9 +275,22 @@ document.addEventListener('DOMContentLoaded', function () {
             tags.forEach((tag, index) => {
                 const tagItem = document.createElement('div');
                 tagItem.className = 'tag-item';
-                tagItem.innerHTML = `<span>${tag.name}</span><span>${tag.timestamp}</span>`;
-                tagItem.addEventListener('click', () => {
+                tagItem.innerHTML = `
+                    <span>${tag.name}</span>
+                    <div>
+                        <span>${tag.timestamp}</span>
+                        <button class="delete-btn" data-index="${index}">删除</button>
+                    </div>
+                `;
+                tagItem.querySelector('span:first-child').addEventListener('click', () => {
                     window.location.href = `edit.html?tagIndex=${index}`;
+                });
+                tagItem.querySelector('.delete-btn').addEventListener('click', () => {
+                    if (confirm(`确定要删除标签 "${tag.name}" 吗？`)) {
+                        tags.splice(index, 1);
+                        localStorage.setItem('markdownTags', JSON.stringify(tags));
+                        renderTags();
+                    }
                 });
                 tagList.appendChild(tagItem);
             });
