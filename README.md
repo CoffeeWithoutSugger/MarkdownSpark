@@ -1,6 +1,6 @@
 # SimpleMarkdonwPreview
+这是一个简单的markdown实时预览编辑器
 
-这是一个简单的markdown实时预览编辑器:
 功能如下:
 > - 欢迎界面
 >   - 查看已保存的标签名称以及保存时间 
