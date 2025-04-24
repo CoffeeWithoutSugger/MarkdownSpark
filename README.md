@@ -1,4 +1,4 @@
-# SimpleMarkdonwPreview
+# MarkdownSpark
 这是一个简单的markdown实时预览编辑器
 
 功能如下:
@@ -17,7 +17,7 @@
 
 预览如下:
 首页:
-![image](https://github.com/user-attachments/assets/983d2451-b9f2-4f91-b0bc-60795c9d452f)
+![image](https://github.com/user-attachments/assets/268d8813-98c5-45dc-9ade-876090387cc8)
 编辑页面(可进行亮/暗色调切换):
 ![image](https://github.com/user-attachments/assets/beae2d01-0358-45e3-9422-c1f6ce175294)
 ![image](https://github.com/user-attachments/assets/ded0fe6c-9764-4e6e-9771-d61ff7213235)
