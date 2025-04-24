@@ -1,0 +1,10 @@
+{
+  "name": "markdown-spark",
+  "version": "1.0.0",
+  "description": "A vibrant Markdown editor",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html edit.html styles.css script.js dist/"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
