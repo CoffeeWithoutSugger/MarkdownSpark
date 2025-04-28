@@ -12,9 +12,34 @@ document.addEventListener('DOMContentLoaded', function () {
         const themeSwitch = document.getElementById('theme-switch');
         const saveTagBtn = document.getElementById('save-tag');
 
-        // 渲染Markdown的函数
+        // 渲染Markdown的函数，预处理引用块
         function renderMarkdown() {
-            const markdown = editor.value;
+            let markdown = editor.value;
+            let lines = markdown.split('\n');
+            let processedLines = [];
+            let inBlockquote = false;
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trimStart();
+                // 如果当前行以 > 开头，标记为引用块
+                if (line.startsWith('>')) {
+                    inBlockquote = true;
+                    processedLines.push(lines[i]);
+                } else {
+                    // 如果当前行不以 > 开头，且之前在引用块中，终止引用
+                    if (inBlockquote && line !== '') {
+                        inBlockquote = false;
+                        // 确保引用块后有空行
+                        if (i > 0 && processedLines[processedLines.length - 1] !== '') {
+                            processedLines.push('');
+                        }
+                    }
+                    processedLines.push(lines[i]);
+                }
+            }
+
+            // 重新组合处理后的内容并渲染
+            markdown = processedLines.join('\n');
             const html = marked.parse(markdown, { breaks: true });
             preview.innerHTML = html;
         }
@@ -35,6 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const start = editor.selectionStart;
             const end = editor.selectionEnd;
             const value = editor.value;
+            // 针对 blockquote 特殊处理，添加空行以终止引用
+            if (text === '> ') {
+                text = '> \n\n'; // 在引用后添加空行
+                cursorOffset = -2; // 调整光标位置到引用行末
+            }
             editor.value = value.substring(0, start) + text + value.substring(end);
             editor.selectionStart = editor.selectionEnd = start + text.length + cursorOffset;
             editor.focus();
@@ -174,6 +204,8 @@ document.addEventListener('DOMContentLoaded', function () {
             renderMarkdown();
             const cursorPos = editor.selectionStart;
             const textBeforeCursor = editor.value.substring(0, cursorPos);
+
+            // 显示建议菜单逻辑
             if (textBeforeCursor.endsWith('/')) {
                 toggleSuggestions(true);
             } else {
