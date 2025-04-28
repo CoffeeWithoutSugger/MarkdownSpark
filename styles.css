@@ -148,6 +148,28 @@ body.dark #preview th, body.dark #preview td {
     border-color: #666;
 }
 
+#preview blockquote {
+    border-left: 4px solid #4f46e5;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background: var(--input-bg-light);
+    color: var(--text-color-light);
+}
+
+#preview blockquote p {
+    margin: 0;
+}
+
+body.dark #preview blockquote {
+    background: var(--input-bg-dark);
+    color: var(--text-color-dark);
+    border-left-color: #ecf0f1;
+}
+
+#preview p {
+    margin: 10px 0;
+}
+
 .suggestions {
     position: absolute;
     top: 50px;
